@@ -11,7 +11,7 @@
 | last_name          | string | null: false |
 | first_name_kana    | string | null: false |
 | last_name_kana     | string | null: false |
-| birthday           | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 has_many :items
@@ -21,21 +21,21 @@ has_many :purchases
 
 ## items テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| item_name          | string | null: false |
-| explanation        | text   | null: false |
-| category           | string | null: false |
-| delivery           | string | null: false |
-| region             | string | null: false |
-| number_of_day      | string | null: false |
-| price              | string | null: false |
-| seller_user        | references | null: false, foreign_key: true |
-| sold               | string | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------  | ----------- |
+| item_name          | string  | null: false |
+| explanation        | text    | null: false |
+| category_id        | integer | null: false |
+| condition_id       | integer | null: false |
+| delivery_id        | integer | null: false |
+| region_id          | integer | null: false |
+| number_of_day_id   | integer | null: false |
+| price              | integer | null: false |
+| user               | references | null: false, foreign_key: true |
 
 
 ### Association
-belongs_to :seller_user
+belongs_to :user
 has_one: purchase
 
 
@@ -44,27 +44,27 @@ has_one: purchase
 
 | Column       | Type       | Options                        |
 | -------      | ---------- | ------------------------------ |
-| buyer_user   | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
-| buyer_address| references | null: false, foreign_key: true |
 
 
 ### Association
-belongs_to :buyer_user
+belongs_to :user
 belongs_to :item
-has_one: buyer_address
+has_one :address
 
 
 ## address テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| postcode           | string | null: false |
-| prefecture         | string | null: false |
-| city               | string | null: false |
-| street             | string | null: false |
-| building           | string | null: true  |
-| phone_number       | string | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------  | ----------- |
+| postcode_id        | integer | null: false |
+| prefecture_id      | integer | null: false |
+| city               | string  | null: false |
+| street             | string  | null: false |
+| building           | string  | null: true  |
+| phone_number       | string  | null: false |
+| purchase           | references | null: false, foreign_key: true |
 ### Association
 belongs_to :purchase
 
