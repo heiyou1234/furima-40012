@@ -28,7 +28,7 @@ has_many :purchases
 | category_id        | integer | null: false |
 | condition_id       | integer | null: false |
 | delivery_id        | integer | null: false |
-| region_id          | integer | null: false |
+| prefecture_id      | integer | null: false |
 | number_of_day_id   | integer | null: false |
 | price              | integer | null: false |
 | user               | references | null: false, foreign_key: true |
@@ -36,7 +36,7 @@ has_many :purchases
 
 ### Association
 belongs_to :user
-has_one: purchase
+has_one　:purchase
 
 
 ## purchases テーブル
@@ -58,7 +58,7 @@ has_one :address
 
 | Column             | Type    | Options     |
 | ------------------ | ------  | ----------- |
-| postcode_id        | integer | null: false |
+| postcode           | string  | null: false |
 | prefecture_id      | integer | null: false |
 | city               | string  | null: false |
 | street             | string  | null: false |
