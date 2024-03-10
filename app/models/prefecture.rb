@@ -1,4 +1,4 @@
-class Condition < ActiveHash::Base
+class Prefecture < ActiveHash::Base
   self.data = [
     { id: 1, id: '---' },
     { id: 2, id: '1\~2日で発送' },
