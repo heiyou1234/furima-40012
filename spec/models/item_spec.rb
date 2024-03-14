@@ -32,8 +32,18 @@ context '出品できない場合' do
     @item.valid?
     expect(@item.errors.full_messages).to include("Category can't be blank")
   end
+  it 'カテゴリーが[---]では保存できない' do
+    @item.category_id=0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Category can't be blank")
+  end
   it '商品状態が空では保存できない' do
     @item.condition_id=nil
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Condition can't be blank")
+  end
+  it '商品状態が[---]では保存できない' do
+    @item.condition_id=1
     @item.valid?
     expect(@item.errors.full_messages).to include("Condition can't be blank")
   end
@@ -42,13 +52,28 @@ context '出品できない場合' do
     @item.valid?
     expect(@item.errors.full_messages).to include("Delivery can't be blank")
   end
+  it '配送料の負担が[---]では保存できない' do
+    @item.delivery_id=1
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Delivery can't be blank")
+  end
   it '発送元の地域が空では保存できない' do
     @item.prefecture_id=nil
     @item.valid?
     expect(@item.errors.full_messages).to include("Prefecture can't be blank")
   end
+  it '発送元の地域が[---]では保存できない' do
+    @item.prefecture_id=0
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+  end
   it '発送までの日数が空では保存できない' do
     @item.number_of_day_id=nil
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Number of day can't be blank")
+  end
+  it '発送までの日数が[---]では保存できない' do
+    @item.number_of_day_id=1
     @item.valid?
     expect(@item.errors.full_messages).to include("Number of day can't be blank")
   end
@@ -66,6 +91,11 @@ context '出品できない場合' do
     @item.price=10000000
     @item.valid?
     expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+  end
+  it 'userが紐付いていなければ出品できない' do
+    @item.user=nil
+    @item.valid?
+    expect(@item.errors.full_messages).to include("User must exist")
   end
   
 end

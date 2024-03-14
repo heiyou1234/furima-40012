@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   validates :item_name, presence: true
   validates :explanation, presence: true
   validates :image, presence: true
-  validates :price, presence: true, format: {with:  /\A[0-9]+\z/},
+  validates :price, presence: true,
                     numericality: {only_integer:true,greater_than_or_equal_to:300, less_than_or_equal_to:9_999_999}
  
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -20,5 +20,5 @@ class Item < ApplicationRecord
   validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
 
   belongs_to :user
-  has_one :purchase
+  #has_one :purchase
 end

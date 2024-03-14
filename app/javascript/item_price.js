@@ -8,5 +8,4 @@ priceInput.addEventListener("input", () => {
  
   const addProfitDom = document.getElementById("profit");
   addProfitDom.innerHTML = (inputValue-Math.floor(inputValue/10))
-  console.log(inputValue);
 })
