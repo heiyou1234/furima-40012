@@ -20,5 +20,5 @@ class Item < ApplicationRecord
   validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
 
   belongs_to :user
-  #has_one :purchase
+  has_one :purchase
 end
