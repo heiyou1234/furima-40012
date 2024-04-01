@@ -43,6 +43,11 @@ context '内容に問題がある場合' do
     @purchase_address.valid?
     expect(@purchase_address.errors.full_messages).to include("User can't be blank")
   end
+  it 'itemが紐付いていないと保存できないこと' do
+    @purchase_address.item_id = nil
+    @purchase_address.valid?
+    expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+  end
   it 'cityが空だと保存できないこと' do
     @purchase_address.city = ''
     @purchase_address.valid?
@@ -64,7 +69,12 @@ context '内容に問題がある場合' do
     expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
   end
   it 'phone_numberが12桁以上だと保存できない' do
-    @purchase_address.phone_number = '123-4567-9098'
+    @purchase_address.phone_number = '1233456759098'
+    @purchase_address.valid?
+    expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
+  end
+  it 'phone_numberが数字以外の文字を使用すると保存できない' do
+    @purchase_address.phone_number = '12-4567-909'
     @purchase_address.valid?
     expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Include hyphen(-)")
   end
